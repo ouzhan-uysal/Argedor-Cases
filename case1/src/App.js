@@ -1,7 +1,8 @@
+import './App.scss'
 import React from 'react';
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
 } from "react-router-dom";
 
@@ -12,10 +13,10 @@ function App() {
   return (
     <>
       <Router>
-        <Switch>
-          <Route path="/:details" component={Details} />
-          <Route path="/" component={Home} />
-        </Switch>
+        <Routes>
+          <Route path="/details" element={<Details />} />
+          <Route path="/" element={<Home />} />
+        </Routes>
       </Router>
     </>
   );

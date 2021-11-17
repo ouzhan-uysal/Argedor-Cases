@@ -3,13 +3,13 @@ import styled from 'styled-components'
 
 const HeaderWrapper = styled.div`
   display: grid;
-  grid-template-columns: auto auto;
+  background-color: red;
 `;
 
 const Header = () => {
   return (
     <HeaderWrapper>
-
+      <h1>Header</h1>
     </HeaderWrapper>
   )
 }

@@ -1,16 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
+import Header from './Header';
 
 const DetailsWrapper = styled.div`
   display: grid;
-  grid-template-columns: auto auto;
+  background-color: blue;
 `;
 
 const Details = () => {
   return (
-    <DetailsWrapper>
-      Home Page
-    </DetailsWrapper>
+    <>
+      <Header />
+      <DetailsWrapper>
+        Details Page
+      </DetailsWrapper>
+    </>
   )
 }
 
