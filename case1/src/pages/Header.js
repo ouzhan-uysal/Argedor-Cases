@@ -3,13 +3,14 @@ import styled from 'styled-components'
 
 const HeaderWrapper = styled.div`
   display: grid;
-  background-color: red;
+  background-color: green;
+  justify-content: center;
 `;
 
 const Header = () => {
   return (
     <HeaderWrapper>
-      <h1>Header</h1>
+      <h1>Oğuzhan Uysal</h1>
     </HeaderWrapper>
   )
 }

@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import offerReducer from './offerReducer';
+import nftReducer from './nftReducer';
 
 const rootReducer = combineReducers({
-  offer: offerReducer,
+  offer: nftReducer,
 });
 
 export default rootReducer;

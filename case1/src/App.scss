@@ -10,7 +10,7 @@ body {
 @media all and (max-width: 650px) {
   body {
     #root {
-      display: flex;
+      display: grid;
     }
   }
 }
