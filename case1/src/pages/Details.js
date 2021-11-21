@@ -1,11 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import { DetailsWrapper } from './Details_SC';
 import Header from './Header';
-
-const DetailsWrapper = styled.div`
-  display: grid;
-  background-color: blue;
-`;
 
 const Details = () => {
   return (

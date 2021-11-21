@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components'
+import { connect, disconnect } from '../actions/connectionAction';
 
 const HeaderWrapper = styled.div`
   display: grid;
@@ -7,25 +9,17 @@ const HeaderWrapper = styled.div`
   background-color: green;
   justify-content: center;
 `;
-const Header = () => {
-  const [isConnected, setIsConnected] = useState(false);
-  const isPhantomInstalled = window.solana.isPhantom && window.solana.isConnected
 
-  useEffect(() => {
-    if (isPhantomInstalled) {
-      setIsConnected(true);
-    } else {
-      setIsConnected(false);
-    }
-  }, [isPhantomInstalled])
+const Header = () => {
+  const { isConnected } = useSelector(state => state.connection);
+  const dispatch = useDispatch();
 
   const connectWallet = async () => {
     try {
       const resp = await window.solana.connect();
-      console.log("Responsive: ", resp)
       resp.publicKey.toString()
-
-      setIsConnected(true);
+      console.log("Responsive: ", resp)
+      dispatch(connect());
       // 26qv4GCcx98RihuK3c4T6ozB3J7L6VwCuFVc7Ta2A3Uo
       // My Key: 29QPT5gnSUWtxnH54L5vfZMNmpqBVdDFcWWE5ndwHYgjuKwDViFhBDSYuxUZmMUj8gZaG6gcDDs73fPMpdTjCYia
     } catch (err) {
@@ -35,8 +29,8 @@ const Header = () => {
   }
   const disconnectWallet = () => {
     window.solana.disconnect();
+    dispatch(disconnect());
     window.solana.on('disconnect', () => console.log("disconnected!"))
-    setIsConnected(false);
   }
 
   return (

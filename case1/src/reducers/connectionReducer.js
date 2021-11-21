@@ -4,15 +4,15 @@ const INITIAL_STATE = {
   isConnected: false
 }
 
-const checkConnection = (state = INITIAL_STATE, action) => {
+const connectionReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case CONNECT:
-      return { state };
+      return { state, isConnected: action.payload.isConnected };
     case DISCONNECT:
-      return { state };
+      return { state, isConnected: action.payload.isConnected };
     default:
       return { ...state };
   }
 }
 
-export default checkConnection;
+export default connectionReducer;
