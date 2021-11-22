@@ -6,7 +6,12 @@ export const DetailsWrapper = styled.div`
   justify-content: center;
   margin: 1rem 0;
   padding: 1rem 0;
-  .data-info {
+  .nft-details {
     padding: 1rem;
+    text-align: center;
+    img {
+      max-height: 100%;
+      max-width: 100%;
+    }
   }
 `;

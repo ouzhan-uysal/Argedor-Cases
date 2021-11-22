@@ -8,6 +8,9 @@ const HeaderWrapper = styled.div`
   display: grid;
   justify-items: center;
   padding: 1rem 1rem;
+  h1 {
+    text-align: center;
+  }
 `;
 
 const Header = () => {
@@ -33,13 +36,14 @@ const Header = () => {
 
   return (
     <HeaderWrapper>
-      <h1>Oğuzhan Uysal</h1>
+      <h1>Argedor Phantom Wallet Case</h1>
+      <h3>-By Oğuzhan Uysal</h3>
       {
         isConnected
           ?
-          <button onClick={() => disconnectWallet()}>Bağlantıyı Kes</button>
+          <button onClick={() => disconnectWallet()}>DISCONNECT</button>
           :
-          <button onClick={() => connectWallet()}>Bağla</button>
+          <button onClick={() => connectWallet()}>CONNECT</button>
       }
     </HeaderWrapper>
   )

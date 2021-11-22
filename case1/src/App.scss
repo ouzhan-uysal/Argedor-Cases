@@ -2,9 +2,18 @@ body {
   background-color: #e6e6e6;
   max-height: 100vh;
   #root {
-    margin: 0;
     padding: 0;
     margin: 1rem 1rem;
+    .loading-container {
+      background-color: green;
+      padding: 1rem;
+      text-align: center;
+    }
+    .connection-container {
+      background-color: red;
+      padding: 1rem;
+      text-align: center;
+    }
   }
 }
 
@@ -13,7 +22,7 @@ body {
   body {
     #root {
       display: grid;
-      margin: 0 1rem;
+      margin: 0;
     }
   }
 }
