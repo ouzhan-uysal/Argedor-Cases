@@ -14,7 +14,7 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/details" element={<Details />} />
+          <Route path="/:nftDetails" element={<Details />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </Router>

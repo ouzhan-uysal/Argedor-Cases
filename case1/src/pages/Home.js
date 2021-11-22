@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { HomeWrapper } from './Home_SC';
+import { HomeWrapper } from '../assets/Home_SC';
 import Header from './Header';
 import { useSelector } from 'react-redux';
+import { useNavigate, useParams } from "react-router-dom";
 
 // Create connection
 import { Connection, clusterApiUrl } from "@solana/web3.js";
-import { getParsedNftAccountsByOwner, isValidSolanaAddress, createConnectionConfig, } from "@nfteyez/sol-rayz";
+import { getParsedNftAccountsByOwner, createConnectionConfig, } from "@nfteyez/sol-rayz";
+import axios from 'axios';
 
 const Home = () => {
   const { isConnected } = useSelector(state => state.connection);
-  // const [isConnected, setisConnected] = useState(false);
   const [nftData, setNftData] = useState([]);
+  let navigate = useNavigate();
+  const { nftDetails } = useParams();
 
-  // create a connection of devnet
-  const createConnection = () => {
-    return new Connection(clusterApiUrl("devnet"));
-  };
-  createConnection();
+  new Connection(clusterApiUrl("devnet"));
 
   // check solana on window. This is useful to fetch address of your wallet.
   const getProvider = () => {
@@ -33,15 +32,17 @@ const Home = () => {
     try {
       const connect = createConnectionConfig(clusterApiUrl("devnet"));
       const provider = getProvider();
-      let ownerToken = provider.publicKey;
-      const result = isValidSolanaAddress(ownerToken);
-      console.log("result", result);
-      const nfts = await getParsedNftAccountsByOwner({
-        publicAddress: ownerToken,
-        connection: connect,
-        serialization: true,
-      });
-      return nfts;
+      if (provider) {
+        let ownerToken = provider.publicKey;
+        // const result = isValidSolanaAddress(ownerToken);
+        // console.log("result", result);
+        const nfts = await getParsedNftAccountsByOwner({
+          publicAddress: ownerToken,
+          connection: connect,
+          serialization: true,
+        });
+        return nfts;
+      }
     } catch (error) {
       console.log(error);
     }
@@ -49,11 +50,24 @@ const Home = () => {
 
   useEffect(() => {
     async function data() {
-      let res = await getAllNftData();
-      setNftData(res);
+      try {
+        let nftData = await getAllNftData();
+        var data = Object.keys(nftData).map((key) => nftData[key]);
+        let arr = [];
+        let n = data.length;
+        for (let i = 0; i < n; i++) {
+          // console.log(data[i].data.uri);
+          let val = await axios.get(data[i].data.uri);
+          arr.push(val);
+        }
+        console.log(arr)
+        setNftData(arr);
+      } catch (error) {
+        console.log(error);
+      }
     }
-    console.log("NFT Data: ", nftData)
     data();
+    console.log("NFT Data: ", nftData)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isConnected]);
 
@@ -67,12 +81,12 @@ const Home = () => {
           nftData.length > 0 &&
           nftData.map((val, ind) => {
             return (
-              <div className="card-container" onClick={null} key={ind}>
-                <div className="card-item">
+              <div className="card-container" key={ind}>
+                <div className="card-item" onClick={() => navigate(`/${val.data.name}`)}>
                   <img src={val.data.image} alt="loading..." />
                   <div className="">{val.data.name}</div>
-                  <div className="">{val.data.sellerFeeBasisPoints}</div>
-                  <div className="">{val.mint}</div>
+                  <div className="">{val.data.description}</div>
+                  <div className="">{val.data.seller_fee_basis_points}</div>
                 </div>
               </div>
             );

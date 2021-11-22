@@ -4,10 +4,10 @@ import styled from 'styled-components'
 import { connect, disconnect } from '../actions/connectionAction';
 
 const HeaderWrapper = styled.div`
+  background-color: #808080;
   display: grid;
-  grid-template-rows: auto auto;
-  background-color: green;
-  justify-content: center;
+  justify-items: center;
+  padding: 1rem 1rem;
 `;
 
 const Header = () => {
@@ -18,10 +18,8 @@ const Header = () => {
     try {
       const resp = await window.solana.connect();
       resp.publicKey.toString()
-      console.log("Responsive: ", resp)
+      // console.log("Responsive: ", resp)
       dispatch(connect());
-      // 26qv4GCcx98RihuK3c4T6ozB3J7L6VwCuFVc7Ta2A3Uo
-      // My Key: 29QPT5gnSUWtxnH54L5vfZMNmpqBVdDFcWWE5ndwHYgjuKwDViFhBDSYuxUZmMUj8gZaG6gcDDs73fPMpdTjCYia
     } catch (err) {
       console.log(err)
       // { code: 4001, message: 'User rejected the request.' }
