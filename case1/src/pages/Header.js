@@ -20,12 +20,12 @@ const Header = () => {
   const connectWallet = async () => {
     try {
       const resp = await window.solana.connect();
-      resp.publicKey.toString()
       // console.log("Responsive: ", resp)
+      resp.publicKey.toString()
       dispatch(connect());
     } catch (err) {
-      console.log(err)
       // { code: 4001, message: 'User rejected the request.' }
+      console.log(err)
     }
   }
   const disconnectWallet = () => {

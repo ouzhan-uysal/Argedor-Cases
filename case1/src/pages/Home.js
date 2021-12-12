@@ -57,8 +57,7 @@ const Home = () => {
         if (nftData) {
           var data = Object.keys(nftData).map((key) => nftData[key]);
           let arr = [];
-          let n = data.length;
-          for (let i = 0; i < n; i++) {
+          for (let i = 0; i < data.length; i++) {
             // console.log(data[i].data.uri);
             let val = await axios.get(data[i].data.uri);
             arr.push(val);
